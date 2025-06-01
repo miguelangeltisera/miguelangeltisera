@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolución de la Evaluación Pedagógica</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #F8F9FA;
+}
+.timeline-container {
+  position: relative;
+  padding: 2rem 0;
+}
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 100%;
+  background-color: #CBD5E1;
+}
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+}
+.timeline-item:nth-child(odd) {
+  left: 0;
+  padding-right: 4rem;
+}
+.timeline-item:nth-child(even) {
+  left: 50%;
+  padding-left: 4rem;
+}
+.timeline-content {
+  position: relative;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  padding: 1.5rem;
+}
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  top: 1.5rem;
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border: 4px solid #F2A477;
+  border-radius: 9999px;
+  z-index: 10;
+}
+.timeline-item:nth-child(odd)::after {
+  right: -12px;
+}
+.timeline-item:nth-child(even)::after {
+  left: -12px;
+}
+.overview-timeline {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 2rem 0;
+  padding: 1rem 0;
+}
+.overview-timeline::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: #D96C4E;
+  transform: translateY(-50%);
+}
+.overview-item {
+  position: relative;
+  text-align: center;
+  width: 20%;
+  padding: 0 0.5rem;
+}
+.overview-item::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  border: 3px solid #D96C4E;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+.overview-content {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 1rem;
+}
+@media (max-width: 768px) {
+  .timeline-container::before {
+    left: 1.5rem;
+  }
+  .timeline-item {
+    width: 100%;
+    padding-left: 4rem;
+    padding-right: 1rem;
+  }
+  .timeline-item:nth-child(even) {
+    left: 0%;
+  }
+  .timeline-item::after {
+    left: calc(1.5rem - 12px);
+  }
+  .overview-timeline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .overview-timeline::before {
+    top: 0;
+    left: 7%;
+    height: 100%;
+    width: 4px;
+    transform: none;
+  }
+  .overview-item {
+    width: 100%;
+    text-align: left;
+    padding-left: 3rem;
+    margin-bottom: 1rem;
+  }
+  .overview-item::before {
+    top: 0;
+    left: 7%;
+    transform: translate(-50%, 0);
+  }
+}
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 300px;
+  max-height: 400px;
+}
+@media (min-width: 768px) {
+  .chart-container {
+    height: 350px;
+  }
+}
+</style>
+</head>
+<body class="text-gray-800">
+
+<header class="bg-white shadow-md">
+    <div class="container mx-auto px-6 py-8 text-center">
+        <h1 class="text-4xl font-bold text-[#D96C4E]">Evolución de la Evaluación Pedagógica</h1>
+        <p class="text-lg mt-2 text-gray-600">Una línea de tiempo sobre la transformación de los paradigmas evaluativos</p>
+    </div>
+</header>
+
+<main class="container mx-auto p-4 md:p-8">
+    <!-- Sección de visión general -->
+    <section class="mb-12">
+        <h2 class="text-3xl font-bold text-center mb-8 text-[#00A6A6]">LÍNEA DE TIEMPO DE LA EVOLUCIÓN DE LA EVALUACIÓN EN LA PEDAGOGÍA</h2>
+        
+        <div class="overview-timeline">
+            <div class="overview-item">
+                <h3 class="font-bold text-lg">ANTIGÜEDAD</h3>
+                <div class="overview-content">
+                    <p>Los maestros calificaban a los alumnos a través de pruebas orales</p>
+                </div>
+            </div>
+            
+            <div class="overview-item">
+                <h3 class="font-bold text-lg">1900</h3>
+                <div class="overview-content">
+                    <p>Edward L. Thorndike introdujo el uso de pruebas escritas</p>
+                </div>
+            </div>
+            
+            <div class="overview-item">
+                <h3 class="font-bold text-lg">1960</h3>
+                <div class="overview-content">
+                    <p>Desarrollo de tests estandarizados y evaluación por objetivos</p>
+                </div>
+            </div>
+            
+            <div class="overview-item">
+                <h3 class="font-bold text-lg">1990</h3>
+                <div class="overview-content">
+                    <p>Surge la evaluación auténtica y enfoques constructivistas</p>
+                </div>
+            </div>
+            
+            <div class="overview-item">
+                <h3 class="font-bold text-lg">ÚLTIMOS AVANCES</h3>
+                <div class="overview-content">
+                    <p>Enfoques como la evaluación formativa y el uso de la tecnología transforman la práctica evaluativa</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Línea de tiempo detallada -->
+    <h2 class="text-3xl font-bold text-center mb-8 text-[#D96C4E]">DETALLE POR DÉCADAS</h2>
+    
+    <div class="timeline-container">
+
+        <div class="timeline-item">
+            <div class="timeline-content" style="border-top: 5px solid #00A6A6;">
+                <h2 class="text-2xl font-bold text-[#00A6A6]">1980s: Énfasis en la Medición y Objetivos</h2>
+                <p class="mt-2 mb-4 text-gray-600">Esta década estuvo dominada por el conductismo y la necesidad de estandarización. La evaluación se centró en medir cuantitativamente el logro de objetivos predefinidos, utilizando tests estandarizados como la herramienta principal.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold text-lg">Innovaciones Clave</h3>
+                        <ul class="list-disc list-inside mt-2 text-gray-700">
+                            <li>Tests Estandarizados a gran escala</li>
+                            <li>Evaluación Basada en Objetivos (Tyler)</li>
+                            <li>Primeros intentos de evaluación formativa</li>
+                        </ul>
+                        <h3 class="font-bold text-lg mt-4">Teóricos Influyentes</h3>
+                        <ul class="list-disc list-inside mt-2 text-gray-700">
+                            <li><strong>Ralph Tyler:</strong> Modelo curricular por objetivos.</li>
+                            <li><strong>Benjamin Bloom:</strong> Taxonomía de objetivos y "Mastery Learning".</li>
+                        </ul>
+                    </div>
+                    <div>
+                         <p class="text-sm text-gray-600 mb-2">El gráfico de barras ilustra el dominio de los enfoques de evaluación sumativa y por objetivos durante esta era, con la evaluación formativa como un concepto emergente pero minoritario.</p>
+                        <div class="chart-container h-64 md:h-full">
+                            <canvas id="chart1980"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content" style="border-top: 5px solid #7DCFB6;">
+                <h2 class="text-2xl font-bold text-[#7DCFB6]">1990s: Autenticidad y Constructivismo</h2>
+                <p class="mt-2 mb-4 text-gray-600">Como reacción al modelo anterior, el constructivismo impulsó una evaluación más relevante y centrada en el proceso. Surgieron métodos que buscaban evaluar el desempeño en contextos reales y complejos.</p>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold text-lg">Innovaciones Clave</h3>
+                        <ul class="list-disc list-inside mt-2 text-gray-700">
+                            <li>Evaluación Auténtica y por Desempeño</li>
+                            <li>Portafolios y Rúbricas</li>
+                            <li>Consolidación de la Evaluación Formativa</li>
+                            <li>Autoevaluación y Coevaluación</li>
+                        </ul>
+                        <h3 class="font-bold text-lg mt-4">Teóricos Influyentes</h3>
+                        <ul class="list-disc list-inside mt-2 text-gray-700">
+                            <li><strong>Wiggins & McTighe:</strong> Diseño Inverso (UbD).</li>
+                            <li><strong>Black & Wiliam:</strong> "Inside the Black Box".</li>
+                             <li><strong>Philippe Perrenoud:</strong> Evaluación de competencias.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600 mb-2">El gráfico de anillo muestra cómo las nuevas metodologías constructivistas comenzaron a formar un nuevo paradigma evaluativo, donde la autenticidad y el proceso ganaron un peso significativo.</p>
+                        <div class="chart-container h-64 md:h-full">
+                            <canvas id="chart1990"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content" style="border-top: 5px solid #F2E86D;">
+                <h2 class="text-2xl font-bold text-[#d1c75b]">2000s: Tecnología y Rendición de Cuentas</h2>
+                <p class="mt-2 mb-4 text-gray-600">La expansión de las TIC y un mayor énfasis en la rendición de cuentas (accountability) marcaron esta era. Los datos de evaluaciones a gran escala, como PISA, comenzaron a influir fuertemente en las políticas educativas.</p>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold text-lg">Innovaciones Clave</h3>
+                        <ul class="list-disc list-inside mt-2 text-gray-700">
+                            <li>Plataformas de evaluación en línea y LMS</li>
+                            <li>Uso de datos para la mejora escolar</li>
+                            <li>Influencia de pruebas internacionales (PISA)</li>
+                        </ul>
+                         <h3 class="font-bold text-lg mt-4">Teóricos Influyentes</h3>
+                         <ul class="list-disc list-inside mt-2 text-gray-700">
+                            <li><strong>Richard Stiggins:</strong> "Assessment for learning".</li>
+                            <li><strong>Michael Scriven:</strong> Roles de la evaluación.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600 mb-2">Este gráfico de burbujas representa el impacto creciente de diferentes factores tecnológicos y políticos, donde las pruebas internacionales y el análisis de datos adquirieron una gran relevancia.</p>
+                        <div class="chart-container h-64 md:h-full">
+                            <canvas id="chart2000"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="timeline-item">
+            <div class="timeline-content" style="border-top: 5px solid #F2A477;">
+                <h2 class="text-2xl font-bold text-[#F2A477]">2010s: Personalización y Competencias</h2>
+                <p class="mt-2 mb-4 text-gray-600">La tecnología permitió una personalización sin precedentes. El foco se desplazó hacia la evaluación continua de competencias del siglo XXI, utilizando analíticas de aprendizaje para adaptar la enseñanza a cada estudiante.</p>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold text-lg">Innovaciones Clave</h3>
+                        <ul class="list-disc list-inside mt-2 text-gray-700">
+                            <li>Evaluación Adaptativa (CAT)</li>
+                            <li>Analíticas de Aprendizaje</li>
+                            <li>e-Portfolios y Gamificación</li>
+                            <li>Badges Digitales y Microcredenciales</li>
+                        </ul>
+                        <h3 class="font-bold text-lg mt-4">Teóricos Influyentes</h3>
+                        <ul class="list-disc list-inside mt-2 text-gray-700">
+                            <li><strong>John Hattie:</strong> "Visible Learning".</li>
+                            <li><strong>Rose Luckin:</strong> IA en educación.</li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-col items-center justify-center">
+                        <p class="text-sm text-gray-600 mb-2">Este diagrama, creado con HTML/CSS, muestra cómo diversas tecnologías e ideas se interconectan para dar soporte al aprendizaje personalizado y la evaluación de competencias.</p>
+                        <div class="w-full p-4 rounded-lg bg-gray-50">
+                            <div class="text-center bg-[#F2A477] text-white p-2 rounded-lg shadow-lg">Aprendizaje Personalizado</div>
+                            <div class="grid grid-cols-2 gap-4 mt-4 text-center text-sm">
+                                <div class="border-t-2 border-[#F2A477] pt-2">Analíticas de Aprendizaje</div>
+                                <div class="border-t-2 border-[#F2A477] pt-2">Evaluación Adaptativa</div>
+                                <div class="border-t-2 border-[#F2A477] pt-2">Gamificación</div>
+                                <div class="border-t-2 border-[#F2A477] pt-2">Micro-credenciales</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-content" style="border-top: 5px solid #D96C4E;">
+                <h2 class="text-2xl font-bold text-[#D96C4E]">2020-2025: IA, Habilidades y Bienestar</h2>
+                <p class="mt-2 mb-4 text-gray-600">La era actual y futura está marcada por la inteligencia artificial, la necesidad de evaluar habilidades complejas (soft skills) y un enfoque creciente en el bienestar socioemocional del estudiante y la ética de la evaluación.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold text-lg">Innovaciones Clave</h3>
+                        <ul class="list-disc list-inside mt-2 text-gray-700">
+                            <li>IA en evaluación (Feedback, Proctoring)</li>
+                            <li>Evaluación del Aprendizaje Socioemocional</li>
+                            <li>Evaluación con Realidad Virtual / Aumentada</li>
+                            <li>Énfasis en la Ética y Equidad</li>
+                        </ul>
+                        <h3 class="font-bold text-lg mt-4">Conceptos Influyentes</h3>
+                        <ul class="list-disc list-inside mt-2 text-gray-700">
+                            <li>Ética de la IA (UNESCO, OCDE)</li>
+                            <li>Psicometría y Ciencia de Datos</li>
+                            <li>Co-diseño de la evaluación</li>
+                        </ul>
+                    </div>
+                    <div>
+                         <p class="text-sm text-gray-600 mb-2">El gráfico de líneas proyecta el rápido crecimiento en la adopción e impacto de la IA, junto con un aumento constante en la importancia de la evaluación de habilidades blandas y la ética.</p>
+                        <div class="chart-container h-64 md:h-full">
+                            <canvas id="chart2020"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-gray-800 text-white mt-8">
+    <div class="container mx-auto px-6 py-4 text-center">
+        <p>Infografía creada para visualizar la evolución de la evaluación pedagógica.</p>
+        <p class="text-sm text-gray-400 mt-1">Diseño y desarrollo con Tailwind CSS y Chart.js.</p>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const colors = {
+            teal: '#00A6A6',
+            lightGreen: '#7DCFB6',
+            yellow: '#F2E86D',
+            orange: '#F2A477',
+            darkOrange: '#D96C4E',
+            gray: '#E5E7EB'
+        };
+
+        const sharedChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                       color: '#4A5568'
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (tooltipItems) => {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            return Array.isArray(label) ? label.join(' ') : label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                 x: { ticks: { color: '#4A5568' } },
+                 y: { ticks: { color: '#4A5568' } }
+            }
+        };
+
+        // Gráfico para los años 1980
+        new Chart(document.getElementById('chart1980'), {
+            type: 'bar',
+            data: {
+                labels: ['Tests Estandarizados', 'Evaluación por Objetivos', 'Evaluación Formativa'],
+                datasets: [{
+                    label: 'Nivel de Influencia',
+                    data: [90, 85, 20],
+                    backgroundColor: [colors.teal, colors.lightGreen, colors.gray],
+                }]
+            },
+            options: { ...sharedChartOptions, indexAxis: 'y' }
+        });
+
+        // Gráfico para los años 1990
+        new Chart(document.getElementById('chart1990'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Evaluación Auténtica', 'Portafolios y Rúbricas', 'Evaluación Formativa', 'Autoevaluación'],
+                datasets: [{
+                    label: 'Enfoques Constructivistas',
+                    data: [35, 30, 25, 10],
+                    backgroundColor: [colors.lightGreen, colors.teal, colors.orange, colors.yellow],
+                }]
+            },
+            options: sharedChartOptions
+        });
+        
+        // Gráfico para los años 2000
+        new Chart(document.getElementById('chart2000'), {
+            type: 'bubble',
+            data: {
+                datasets: [{
+                    label: 'Pruebas Internacionales (PISA)',
+                    data: [{ x: 20, y: 30, r: 25 }],
+                    backgroundColor: colors.darkOrange
+                }, {
+                    label: 'Análisis de Datos Escolares',
+                    data: [{ x: 10, y: 22, r: 20 }],
+                    backgroundColor: colors.yellow
+                }, {
+                    label: 'Plataformas Online y LMS',
+                    data: [{ x: 15, y: 15, r: 18 }],
+                    backgroundColor: colors.lightGreen
+                }]
+            },
+            options: { ...sharedChartOptions, scales: { x: { display: false }, y: { display: false } } }
+        });
+
+        // Gráfico para los años 2020-2025
+        new Chart(document.getElementById('chart2020'), {
+            type: 'line',
+            data: {
+                labels: ['2020', '2022', '2025 (Proy.)'],
+                datasets: [{
+                    label: 'Inteligencia Artificial',
+                    data: [30, 60, 90],
+                    borderColor: colors.darkOrange,
+                    backgroundColor: colors.darkOrange + '33',
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'Evaluación Socioemocional',
+                    data: [40, 55, 75],
+                    borderColor: colors.orange,
+                    backgroundColor: colors.orange + '33',
+                    fill: true,
+                    tension: 0.4
+                },{
+                    label: 'Ética y Equidad',
+                    data: [25, 50, 80],
+                    borderColor: colors.teal,
+                    backgroundColor: colors.teal + '33',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: sharedChartOptions
+        });
+    });
+</script>
+</body>
+</html>
